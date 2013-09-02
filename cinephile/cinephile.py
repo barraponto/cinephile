@@ -25,23 +25,24 @@ def main():
 
     # Get possible matches
     source = ImdbSource()
-    print '\nInput: {}\n'.format(args.filepath)
+    print u'\nInput: {}\n'.format(args.filepath)
     file_info = guess_file_info(args.filepath, 'autodetect')
     movie = source.find_by_title(
         args.suggestion if args.suggestion else file_info['title'],
         file_info)
 
+    # If it returned none, it wants to skip.
     if movie is None:
         import sys
         print 'Skipping on {}.'.format(args.filepath)
         sys.exit()
 
     # Prepare the extension.
-    file_extension = ''
+    file_extension = u''
     if file_info.get('cdNumber'):
-        file_extension += '.cd{}'.format(file_info['cdNumber'])
+        file_extension += u'.cd{}'.format(file_info['cdNumber'])
     if file_info.get('container'):
-        file_extension += '.{}'.format(file_info['container'])
+        file_extension += u'.{}'.format(file_info['container'])
 
     # Rename and move the movie file.
     os.renames(args.filepath, os.path.join(
