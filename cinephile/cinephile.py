@@ -25,10 +25,11 @@ def main():
 
     # Get possible matches
     source = ImdbSource()
-    print 'Input: {}'.format(args.filepath)
+    print '\nInput: {}\n'.format(args.filepath)
     file_info = guess_file_info(args.filepath, 'autodetect')
-    movie = source.choose_movie(source.find_by_title(
-        args.suggestion if args.suggestion else file_info['title']))
+    movie = source.find_by_title(
+        args.suggestion if args.suggestion else file_info['title'],
+        file_info)
 
     # Prepare the extension.
     file_extension = ''
