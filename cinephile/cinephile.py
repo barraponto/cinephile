@@ -14,10 +14,10 @@ def main():
     parser.add_argument('--suggestion', default='',
                         help='A file to lookup metadata for.')
     parser.add_argument('--movie_dir_template',
-                        default='{movie.year} {movie.title}',
+                        default=u'{movie.year} {movie.title}',
                         help='A file to lookup metadata for.')
     parser.add_argument('--movie_file_template',
-                        default='{movie.year} {movie.title}',
+                        default=u'{movie.year} {movie.title}',
                         help='A file to lookup metadata for.')
     parser.add_argument('--movies_dir', default=os.path.expanduser('~/Movies'),
                         help='A file to lookup metadata for.')
