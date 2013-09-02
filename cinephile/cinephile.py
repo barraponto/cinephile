@@ -23,13 +23,23 @@ def main():
                         help='A file to lookup metadata for.')
     args = parser.parse_args()
 
-    # Get possible matches
     source = ImdbSource()
     print u'\nInput: {}\n'.format(args.filepath)
+
+    # Get info from file path and name.
     file_info = guess_file_info(args.filepath, 'autodetect')
-    movie = source.find_by_title(
-        args.suggestion if args.suggestion else file_info['title'],
-        file_info)
+
+    # Guess a title to lookup in source.
+    if args.suggestion:
+        title = args.suggestion
+    elif file_info.get('title'):
+        title = file_info['title']
+    else:
+        title = raw_input((u'No title found, resorting to manual input.\n'
+                           'Title: '))
+
+    # Lookup a movie from source.
+    movie = source.find_by_title(title, file_info)
 
     # If it returned none, it wants to skip.
     if movie is None:
