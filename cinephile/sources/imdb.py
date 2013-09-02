@@ -27,11 +27,15 @@ class ImdbSource(object):
         # Build option strings.
         options = [option_template.format(option=i + 1, **movie)
                    for i, movie in enumerate(movies)]
+        options.append('S) Skip this file')
 
         # Ask for user input.
         print '\n'.join(options)
         choice = raw_input(
             'Choose an option from the list (1-{}): '.format(len(movies)))
+
+        if choice == 'S':
+            return None
 
         try:
             movie = movies[int(choice if choice else 1) - 1]

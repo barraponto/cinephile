@@ -31,6 +31,11 @@ def main():
         args.suggestion if args.suggestion else file_info['title'],
         file_info)
 
+    if movie is None:
+        import sys
+        print 'Skipping on {}.'.format(args.filepath)
+        sys.exit()
+
     # Prepare the extension.
     file_extension = ''
     if file_info.get('cdNumber'):
