@@ -30,11 +30,19 @@ def main():
     movie = source.choose_movie(source.find_by_title(
         args.suggestion if args.suggestion else file_info['title']))
 
+    # Prepare the extension.
+    file_extension = ''
+    if file_info.get('cdNumber'):
+        file_extension += '.cd{}'.format(file_info['cdNumber'])
+    if file_info.get('container'):
+        file_extension += '.{}'.format(file_info['container'])
+
     # Rename and move the movie file.
     os.renames(args.filepath, os.path.join(
         args.movies_dir,
         args.movie_dir_template.format(movie=movie),
-        args.movie_file_template.format(movie=movie) + file_info['container']))
+        args.movie_file_template.format(movie=movie)
+        + file_extension))
 
 if __name__ == '__main__':
     main()
